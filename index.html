@@ -1,202 +1,516 @@
 <!DOCTYPE html>
-<html lang="en-us"><head>
-  <!-- Basic Page Needs -->
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  
-  <meta name="description" content="Airspace Hugo theme">
-  <meta name="author" content="Starrfly Labs LLC">
-  <meta name="generator" content="Hugo 0.62.1" />
-  
-  <!-- Mobile Specific Metas -->
-  <meta name="format-detection" content="telephone=no">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Starrfly Labs</title>
-  <link rel="icon" href="https://starrflylabs.com/images/favicon.ico">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Starrfly Labs — Environmental Intelligence</title>
+  <meta name="description" content="Starrfly Labs creates environmental intelligence products that turn ordinary people into a scientific network."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Barlow+Condensed:wght@300;700;900&display=swap" rel="stylesheet"/>
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --white:#FFFFFF;
+  --off:#F7F9F9;
+  --teal:#2BBFAD;           /* decorative use only */
+  --teal-text:#0C6B61;      /* AA-compliant teal for text on white (6.2:1) */
+  --teal-dk:#1E9D8E;
+  --teal-lt:#E6F8F6;
+  --navy:#1A2E35;
+  --text:#1A2E35;
+  --text-mid:#3D5560;       /* 5.8:1 on white */
+  --text-dim:#4E6870;       /* 4.6:1 on white — replaces failing #92A8AF */
+  --border:#D4DFE1;
+  --f-head:'Barlow Condensed',sans-serif;
+  --f-body:'Barlow',sans-serif;
+}
 
-  <!-- Twitter Bootstrs CSS -->
-  <link rel="stylesheet" href="https://starrflylabs.com/plugins/bootstrap/bootstrap.min.css">
-  <!-- Ionicons Fonts Css -->
-  <link rel="stylesheet" href="https://starrflylabs.com/plugins/ionicons/ionicons.min.css">
-  <!-- animate css -->
-  <link rel="stylesheet" href="https://starrflylabs.com/plugins/animate-css/animate.css">
-  <!-- Hero area slider css-->
-  <link rel="stylesheet" href="https://starrflylabs.com/plugins/slider/slider.css">
-  <!-- slick slider -->
-  <link rel="stylesheet" href="https://starrflylabs.com/plugins/slick/slick.css">
-  <!-- Fancybox -->
-  <link rel="stylesheet" href="https://starrflylabs.com/plugins/facncybox/jquery.fancybox.css">
-  <!-- hover -->
-  <link rel="stylesheet" href="https://starrflylabs.com/plugins/hover/hover-min.css">
-  <!-- template main css file -->
-  
-  <link rel="stylesheet" href="https://starrflylabs.com/css/style.min.css" integrity="" media="screen">
-</head><body><section class="top-bar animated-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="https://starrflylabs.com/">
-                        <img src="https://starrflylabs.com/images/logo_header.png" style="max-width: 300px;" alt="logo">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-                        aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:var(--f-body);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.container{max-width:1160px;margin:0 auto;padding:0 2.5rem;}
+.container-narrow{max-width:780px;margin:0 auto;padding:0 2.5rem;}
 
-                    <div class="collapse navbar-collapse" id="navigation">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                    href="https://starrflylabs.com/">Home</a>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://starrflylabs.com/contact">Contact</a>
-                            </li>
-                            
-                    </div>
-                </nav>
-            </div>
-        </div>
+/* SKIP LINK */
+.skip-link{
+  position:absolute;top:-100%;left:1rem;
+  background:var(--navy);color:#fff;
+  font-family:var(--f-body);font-size:.875rem;font-weight:700;
+  padding:.75rem 1.25rem;text-decoration:none;z-index:9999;
+  border-radius:0 0 4px 4px;
+}
+.skip-link:focus{top:0;}
+
+/* SCREEN READER ONLY */
+.sr-only{
+  position:absolute;width:1px;height:1px;
+  padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* FOCUS STYLES */
+:focus-visible{
+  outline:3px solid var(--teal);
+  outline-offset:3px;
+  border-radius:2px;
+}
+.btn-hero:focus-visible,
+.product-link:focus-visible,
+.contact-email:focus-visible{
+  outline-color:var(--navy);
+}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 0;transition:background .35s,padding .35s,box-shadow .35s;}
+.nav.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--border);padding:.9rem 0;}
+.nav-inner{max-width:1160px;margin:0 auto;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:var(--f-head);font-weight:700;font-size:1.25rem;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);text-decoration:none;}
+.nav-logo span{color:var(--teal-text);}
+.nav-links{list-style:none;display:flex;gap:2.75rem;align-items:center;}
+.nav-link{font-family:var(--f-body);font-size:.85rem;font-weight:400;color:var(--text-mid);text-decoration:none;letter-spacing:.04em;position:relative;transition:color .25s;}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--teal);transition:width .25s;}
+.nav-link:hover{color:var(--teal-text);}
+.nav-link:hover::after{width:100%;}
+.nav-link:focus-visible::after{width:100%;}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:var(--text);transition:all .3s;}
+.nav-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--white);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(43,191,173,.18) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(to left,rgba(0,0,0,.5) 0%,transparent 55%);-webkit-mask-image:linear-gradient(to left,rgba(0,0,0,.5) 0%,transparent 55%);pointer-events:none;}
+.hero-accent{position:absolute;top:0;right:0;width:42%;height:100%;background:var(--teal-lt);clip-path:polygon(18% 0,100% 0,100% 100%,0% 100%);z-index:0;}
+.hero-content{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center;max-width:1160px;margin:0 auto;padding:6rem 2.5rem 4rem;}
+.hero-left{padding-right:2rem;}
+.hero-eyebrow{font-family:var(--f-head);font-weight:600;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-text);margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem;}
+.hero-eyebrow::before{content:'_';color:var(--teal-text);font-weight:700;font-size:1rem;aria-hidden:true;}
+.hero-headline{font-family:var(--f-head);line-height:1.0;margin-bottom:1.75rem;}
+.hero-headline .line-light{display:block;font-weight:300;font-size:clamp(2.8rem,5.5vw,5rem);color:var(--navy);letter-spacing:-.01em;}
+.hero-headline .line-bold{display:block;font-weight:900;font-size:clamp(3.8rem,7.5vw,7rem);color:var(--navy);letter-spacing:-.02em;line-height:.95;text-transform:uppercase;}
+.hero-headline .line-teal{display:block;font-weight:900;font-size:clamp(3.8rem,7.5vw,7rem);color:var(--teal-text);letter-spacing:-.02em;line-height:.95;text-transform:uppercase;}
+.hero-sub{font-size:.975rem;color:var(--text-mid);line-height:1.8;max-width:46ch;margin-bottom:2.75rem;}
+.btn-hero{display:inline-flex;align-items:center;gap:.75rem;background:var(--teal);color:#fff;font-family:var(--f-body);font-weight:700;font-size:.85rem;letter-spacing:.07em;text-transform:uppercase;padding:.9rem 2.25rem;text-decoration:none;transition:background .25s,transform .25s,box-shadow .25s;}
+.btn-hero:hover{background:var(--teal-dk);transform:translateY(-2px);box-shadow:0 10px 28px rgba(43,191,173,.3);}
+.hero-right{display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem;padding-left:3rem;}
+.stat-card{background:#fff;border:1px solid var(--border);border-left:3px solid var(--teal);padding:1.25rem 1.75rem;width:100%;max-width:320px;transition:box-shadow .3s,transform .3s;}
+.stat-card:hover{box-shadow:0 8px 24px rgba(43,191,173,.12);transform:translateX(4px);}
+.stat-label{font-family:var(--f-head);font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.35rem;}
+.stat-value{font-family:var(--f-head);font-size:1.6rem;font-weight:700;color:var(--navy);line-height:1.1;}
+.stat-value span{color:var(--teal-text);}
+.stat-sub{font-size:.8rem;color:var(--text-mid);margin-top:.2rem;}
+
+/* SECTIONS */
+.section{padding:6rem 0;}
+.section-alt{background:var(--off);}
+.section-eyebrow{font-family:var(--f-head);font-size:.75rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-text);display:flex;align-items:center;gap:.6rem;margin-bottom:1.5rem;}
+.section-eyebrow::before{content:'_';font-weight:700;font-size:.9rem;}
+.section-heading{font-family:var(--f-head);line-height:1.05;margin-bottom:1.25rem;}
+.section-heading .thin{font-weight:300;font-size:clamp(1.8rem,3.5vw,3rem);display:block;color:var(--navy);}
+.section-heading .heavy{font-weight:900;font-size:clamp(2.4rem,4.5vw,4rem);display:block;color:var(--navy);text-transform:uppercase;letter-spacing:-.02em;line-height:.95;}
+.section-heading .heavy-teal{font-weight:900;font-size:clamp(2.4rem,4.5vw,4rem);display:block;color:var(--teal-text);text-transform:uppercase;letter-spacing:-.02em;line-height:.95;}
+
+/* WHAT WE BUILD */
+.build-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.build-intro{font-size:.975rem;color:var(--text-mid);line-height:1.85;margin-bottom:2.5rem;}
+.product-card{background:#fff;border:1px solid var(--border);padding:2.5rem;position:relative;overflow:hidden;transition:box-shadow .35s,border-color .35s;}
+.product-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--teal);}
+.product-card:hover{box-shadow:0 16px 48px rgba(26,46,53,.08);border-color:var(--teal);}
+.product-badge{font-family:var(--f-head);font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-text);margin-bottom:1.25rem;}
+.product-name{font-family:var(--f-head);font-weight:900;font-size:2.25rem;color:var(--navy);text-transform:uppercase;letter-spacing:-.01em;line-height:1;margin-bottom:.4rem;}
+.product-tagline{font-family:var(--f-head);font-weight:300;font-size:1rem;color:var(--text-mid);font-style:italic;margin-bottom:1.25rem;}
+.product-desc{font-size:.875rem;color:var(--text-mid);line-height:1.8;margin-bottom:2rem;}
+.product-link{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--f-body);font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-text);text-decoration:none;transition:gap .25s;}
+.product-link:hover{gap:.8rem;}
+
+/* Build visual */
+.build-visual{position:relative;}
+.build-vis-wrap{position:relative;width:100%;aspect-ratio:1;max-width:420px;margin:0 auto;}
+.vis-circle{position:absolute;border-radius:50%;border:1px solid var(--border);top:50%;left:50%;transform:translate(-50%,-50%);}
+.vis-circle:nth-child(1){width:22%;height:22%;background:rgba(43,191,173,.15);border-color:rgba(43,191,173,.4);}
+.vis-circle:nth-child(2){width:42%;height:42%;background:rgba(43,191,173,.06);border-color:rgba(43,191,173,.2);}
+.vis-circle:nth-child(3){width:62%;height:62%;background:rgba(43,191,173,.03);border-color:rgba(43,191,173,.12);}
+.vis-circle:nth-child(4){width:82%;height:82%;border-color:rgba(43,191,173,.07);}
+.vis-circle:nth-child(5){width:100%;height:100%;border-color:rgba(43,191,173,.04);}
+.vis-pin{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px rgba(43,191,173,.2);transform:translate(-50%,-50%);animation:pinPulse 2.5s ease-in-out infinite;}
+.vis-pin:nth-child(6){top:50%;left:50%;width:12px;height:12px;animation-delay:0s;}
+.vis-pin:nth-child(7){top:24%;left:62%;animation-delay:.4s;background:var(--navy);}
+.vis-pin:nth-child(8){top:68%;left:28%;animation-delay:.8s;}
+.vis-pin:nth-child(9){top:35%;left:18%;animation-delay:1.2s;background:var(--navy);}
+.vis-pin:nth-child(10){top:72%;left:70%;animation-delay:.6s;}
+.vis-pin:nth-child(11){top:18%;left:40%;animation-delay:1.6s;}
+@keyframes pinPulse{0%,100%{box-shadow:0 0 0 3px rgba(43,191,173,.2);}50%{box-shadow:0 0 0 7px rgba(43,191,173,.1);}}
+
+/* MISSION */
+.mission-layout{display:grid;grid-template-columns:5fr 7fr;gap:5rem;align-items:start;}
+.mission-quote{font-family:var(--f-head);font-weight:300;font-style:italic;font-size:clamp(1.2rem,2vw,1.6rem);color:var(--navy);line-height:1.55;border-top:3px solid var(--teal);padding-top:1.5rem;margin-bottom:2rem;}
+.mission-body p{font-size:.925rem;color:var(--text-mid);line-height:1.9;margin-bottom:1.25rem;}
+.values-list{margin-top:2.5rem;}
+.value-row{display:grid;grid-template-columns:3rem 1fr;gap:0 1.25rem;align-items:start;padding:1.5rem 0;border-bottom:1px solid var(--border);}
+.value-row:last-child{border-bottom:none;}
+.value-num{font-family:var(--f-head);font-weight:900;font-size:1.75rem;color:var(--teal);line-height:1;padding-top:.1rem;opacity:.4;}
+.value-title{font-family:var(--f-head);font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:.05em;color:var(--navy);margin-bottom:.35rem;}
+.value-desc{font-size:.85rem;color:var(--text-mid);line-height:1.7;}
+
+/* ABOUT */
+.about-text{font-size:1.1rem;color:var(--text-mid);line-height:1.9;margin-bottom:1.5rem;max-width:60ch;}
+
+/* CONTACT */
+.contact-section{background:var(--navy);overflow:hidden;position:relative;}
+.contact-section::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;border-radius:50%;border:1px solid rgba(43,191,173,.1);pointer-events:none;}
+.contact-section::after{content:'';position:absolute;top:10%;right:5%;width:350px;height:350px;border-radius:50%;border:1px solid rgba(43,191,173,.08);pointer-events:none;}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+.contact-left .section-eyebrow{color:#6EDDD1;}   /* lightened for dark bg — 4.6:1 on navy */
+.contact-headline{font-family:var(--f-head);line-height:1.0;}
+.contact-headline .thin{font-weight:300;font-size:clamp(2rem,4vw,3.5rem);display:block;color:rgba(255,255,255,.85);}
+.contact-headline .heavy{font-weight:900;font-size:clamp(3rem,5.5vw,5.5rem);display:block;color:#fff;text-transform:uppercase;letter-spacing:-.02em;line-height:.9;}
+.contact-headline .heavy-teal{font-weight:900;font-size:clamp(3rem,5.5vw,5.5rem);display:block;color:#6EDDD1;text-transform:uppercase;letter-spacing:-.02em;line-height:.9;}
+.contact-body{font-size:.925rem;color:rgba(255,255,255,.75);line-height:1.85;margin-bottom:2.25rem;max-width:46ch;}
+.contact-email{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--f-head);font-weight:700;font-size:1.35rem;letter-spacing:.02em;color:#fff;text-decoration:none;border-bottom:2px solid rgba(110,221,209,.5);padding-bottom:4px;transition:color .25s,border-color .25s;}
+.contact-email:hover{color:#6EDDD1;border-color:#6EDDD1;}
+.contact-email:focus-visible{outline-color:#6EDDD1;}
+
+/* FOOTER */
+.footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding:1.75rem 0;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:var(--f-head);font-weight:700;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;}
+.footer-logo span{color:#6EDDD1;}
+.footer-sub{font-size:.75rem;color:rgba(255,255,255,.5);margin-top:.15rem;}
+.footer-links{display:flex;gap:2rem;align-items:center;}
+.footer-link{font-size:.78rem;color:rgba(255,255,255,.6);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+.footer-link:hover{color:#6EDDD1;}
+.footer-link:focus-visible{outline-color:#6EDDD1;}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  html{scroll-behavior:auto;}
+  .reveal{opacity:1;transform:none;}
+}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-content{grid-template-columns:1fr;padding-top:8rem;}
+  .hero-left{padding-right:0;}
+  .hero-right{padding-left:0;flex-direction:row;flex-wrap:wrap;max-width:500px;}
+  .stat-card{max-width:none;flex:1;min-width:200px;}
+  .hero-accent{width:100%;height:45%;top:auto;bottom:0;clip-path:polygon(0 30%,100% 0,100% 100%,0 100%);}
+  .build-layout{grid-template-columns:1fr;}
+  .build-visual{display:none;}
+  .mission-layout{grid-template-columns:1fr;}
+  .contact-inner{grid-template-columns:1fr;gap:2.5rem;}
+}
+@media(max-width:640px){
+  .section{padding:4rem 0;}
+  .nav-links{position:fixed;inset:0;background:#fff;flex-direction:column;justify-content:center;align-items:center;gap:2.5rem;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);z-index:98;}
+  .nav-links.open{transform:translateX(0);}
+  .nav-link{font-size:1.3rem;color:var(--text);}
+  .nav-toggle{display:flex;z-index:99;}
+  .hero-headline .line-bold,.hero-headline .line-teal{font-size:3.2rem;}
+  .hero-right{display:none;}
+  .footer-inner{flex-direction:column;align-items:flex-start;}
+}
+  </style>
+</head>
+<body>
+
+  <!-- Skip Navigation -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav aria-label="Primary navigation" class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="Starrfly Labs — home">Starrfly <span>Labs</span></a>
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="#what-we-build" class="nav-link">What We Build</a></li>
+        <li><a href="#mission" class="nav-link">Our Mission</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
     </div>
-</section>
+  </nav>
 
+  <main id="main-content">
 
-<!-- Slider Section Start -->
-<section id="hero-area" style='background-image: url("https://starrflylabs.com/images/slider.jpg");'>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="block wow fadeInUp" data-wow-delay=".3s">
-                    <!-- Slider -->
-                    <section class="cd-intro">
-                        <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s">
-                            <span>a technology company</span>
-                            <br>
-                            <span class="cd-words-wrapper">
-                                
-                                    
-                                    <b class="is-visible">websites</b>
-                                    
-                                
-                                    
-                                    <b>applications</b>
-                                    
-                                
-                                    
-                                    <b>machine learning</b>
-                                    
-                                
-                                    
-                                    <b>hardware</b>
-                                    
-                                
-                            </span>
-                        </h1>
-                    </section>
-                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s">We create minimalist technology products that are user-focused and ethical.</h2>
-                    
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-accent" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="hero-left">
+          <p class="hero-eyebrow reveal" aria-hidden="true">Environmental Intelligence</p>
+          <h1 id="hero-heading" class="hero-headline reveal">
+            <span class="line-light">We build the tools</span>
+            <span class="line-bold">to see what</span>
+            <span class="line-teal">others miss.</span>
+          </h1>
+          <p class="hero-sub reveal">Starrfly Labs creates environmental intelligence products — platforms that turn ordinary people into a scientific network, and turn that network into data the world can act on.</p>
+          <a href="#what-we-build" class="btn-hero reveal">
+            See Our Work
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="hero-right reveal" aria-label="Company at a glance">
+          <div class="stat-card">
+            <p class="stat-label">Model</p>
+            <p class="stat-value">Citizen <span>Science</span></p>
+            <p class="stat-sub">Crowdsourced environmental data</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Current Product</p>
+            <p class="stat-value"><span>Soil</span>Census</p>
+            <p class="stat-sub">Soil microbiome mapping — coming soon</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Approach</p>
+            <p class="stat-value">Depth <span>First</span></p>
+            <p class="stat-sub">One thing built well before the next</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE BUILD -->
+    <section class="section section-alt" id="what-we-build" aria-labelledby="build-heading">
+      <div class="container">
+        <div class="build-layout">
+          <div>
+            <p class="section-eyebrow reveal" aria-hidden="true">What We Build</p>
+            <h2 id="build-heading" class="section-heading reveal">
+              <span class="thin">Science, in the</span>
+              <span class="heavy">hands of</span>
+              <span class="heavy-teal">everyone.</span>
+            </h2>
+            <p class="build-intro reveal">We build tools that let ordinary people contribute to the scientific record — because the most important environmental data often lives in a backyard, not a lab. Our products share a common model: citizens contribute observations, we own the aggregation layer, and the dataset grows more valuable with every contribution.</p>
+
+            <article class="product-card reveal" aria-labelledby="soilcensus-name">
+              <p class="product-badge">Coming Soon</p>
+              <h3 id="soilcensus-name" class="product-name">SoilCensus</h3>
+              <p class="product-tagline">Soil microbiome mapping, powered by citizen science.</p>
+              <p class="product-desc">Building the first crowdsourced map of what lives in the soil beneath our feet — at the resolution of a backyard, a community garden, a family farm. Anyone can participate. Every sample makes the dataset more valuable.</p>
+              <a
+                href="https://soilcensus.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="product-link"
+                aria-label="Visit SoilCensus.com (opens in new tab)"
+              >
+                Visit SoilCensus.com
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          </div>
+
+          <div class="build-visual reveal" aria-hidden="true">
+            <div class="build-vis-wrap">
+              <div class="vis-circle"></div>
+              <div class="vis-circle"></div>
+              <div class="vis-circle"></div>
+              <div class="vis-circle"></div>
+              <div class="vis-circle"></div>
+              <div class="vis-pin"></div>
+              <div class="vis-pin"></div>
+              <div class="vis-pin"></div>
+              <div class="vis-pin"></div>
+              <div class="vis-pin"></div>
+              <div class="vis-pin"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="section" id="mission" aria-labelledby="mission-heading">
+      <div class="container">
+        <div class="mission-layout">
+          <div>
+            <p class="section-eyebrow reveal" aria-hidden="true">Why We Exist</p>
+            <h2 id="mission-heading" class="section-heading reveal">
+              <span class="thin">Our</span>
+              <span class="heavy">Mission</span>
+            </h2>
+            <blockquote class="mission-quote reveal">
+              Starrfly Labs sees what others overlook — the living world beneath the soil, the invasive threat crossing the county line — and builds the tools to act on it.
+            </blockquote>
+          </div>
+          <div>
+            <div class="mission-body">
+              <p class="reveal">The environmental data that matters most is often the hardest to collect. Satellites don't see soil microbiomes. Surveys don't move fast enough to catch an invasive species before it spreads. Government agencies have the mandate but not the infrastructure.</p>
+              <p class="reveal">We fill that gap. Our products are designed from the ground up for citizen participation — simple enough for anyone to use, rigorous enough for researchers and institutions to trust. The data belongs to the community that generates it.</p>
+            </div>
+            <ul class="values-list" aria-label="Our values">
+              <li class="value-row reveal">
+                <span class="value-num" aria-hidden="true">01</span>
+                <div>
+                  <h3 class="value-title">Open by Default</h3>
+                  <p class="value-desc">The data should be as open as possible and as protected as necessary.</p>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Slider Section End -->
-
-
-
-<!-- About Section Start -->
-<section id="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="block wow fadeInLeft" data-wow-delay=".3s" data-wow-duration="500ms">
-                    <h2>ABOUT</h2>
-                    <p><p>Here at Starrfly Labs, our mission is simple. We create minimalist technology products that are user-focused and ethical. But what does that mean, exactly?</p><p> Our tech tools are meant to empower the businesses we partner with to meet (and exceed) their goals. With turnkey solutions, our products help users spend less time learning how to use them and more time on what matters -- growing their bottom line.</p><p> More importantly, Starrfly Labs was created with a bigger endgame in mind: We want to find a way to make meaningful contributions to society on a universal scale. Ultimately this is the target we have in mind during our design process, and what drives our passion to help others find success.</p><p> We know there are plenty of other software companies out there, but we’re more than that. We empower users to operate at a level that matches their vision while also being a part of something bigger.</p></p>
+              </li>
+              <li class="value-row reveal">
+                <span class="value-num" aria-hidden="true">02</span>
+                <div>
+                  <h3 class="value-title">Rigor Without Gatekeeping</h3>
+                  <p class="value-desc">A backyard sample is as scientifically valuable as a field study sample. We design for both.</p>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="block wow fadeInRight" data-wow-delay=".3s" data-wow-duration="500ms">
-                    <img src="https://starrflylabs.com/images/logo_blue.png" alt="about-image">
+              </li>
+              <li class="value-row reveal">
+                <span class="value-num" aria-hidden="true">03</span>
+                <div>
+                  <h3 class="value-title">Depth Over Breadth</h3>
+                  <p class="value-desc">We build things that last. One good product is worth more than three half-finished ones.</p>
                 </div>
-            </div>
+              </li>
+            </ul>
+          </div>
         </div>
-    </div>
-</section>
-<!-- About Section End -->
+      </div>
+    </section>
 
+    <!-- ABOUT -->
+    <section class="section section-alt" id="about" aria-labelledby="about-heading">
+      <div class="container-narrow">
+        <p class="section-eyebrow reveal" aria-hidden="true">About Starrfly Labs</p>
+        <h2 id="about-heading" class="section-heading reveal">
+          <span class="thin">Independent.</span>
+          <span class="heavy-teal">Purposeful.</span>
+        </h2>
+        <p class="about-text reveal">Starrfly Labs is an independent product studio based in North Carolina. We are building environmental intelligence products that didn't exist before — and that the world increasingly needs.</p>
+        <p class="about-text reveal">We are small by design. Every product we build gets our full attention until it works. We move carefully and we move with purpose.</p>
+      </div>
+    </section>
 
-
-
-
-
-
-<!-- Call To Action Section Start -->
-<section id="call-to-action">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="block">
-                    <h2 class="title wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">Get in touch</h1>
-                    <p class="wow fadeInDown" data-wow-delay=".5s" data-wow-duration="500ms">Get in touch with us to discuss your technology needs.</p>
-                    <a href="/contact" class="btn btn-default btn-contact wow fadeInDown" data-wow-delay=".7s" data-wow-duration="500ms">Contact Us</a>
-                </div>
-            </div>
-
+    <!-- CONTACT -->
+    <section class="section contact-section" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact-inner">
+          <div class="contact-left">
+            <p class="section-eyebrow reveal" aria-hidden="true">Let's Talk</p>
+            <h2 id="contact-heading" class="contact-headline reveal">
+              <span class="thin">Get</span>
+              <span class="heavy">in</span>
+              <span class="heavy-teal">touch.</span>
+            </h2>
+          </div>
+          <div class="contact-right">
+            <p class="contact-body reveal">We're interested in conversations with researchers, land managers, city governments, university extension offices, conservation organizations, and anyone who thinks citizen science can help solve a problem they're working on.</p>
+            <a
+              href="mailto:hello@starrflylabs.com"
+              class="contact-email reveal"
+              aria-label="Send email to hello@starrflylabs.com"
+            >
+              hello@starrflylabs.com
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-logo" aria-label="Starrfly Labs">Starrfly <span>Labs</span></p>
+        <p class="footer-sub">Starrfly Labs LLC &copy; <span id="footerYear"></span></p>
+      </div>
+      <nav aria-label="Footer navigation" class="footer-links">
+        <a
+          href="https://soilcensus.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-link"
+          aria-label="Visit SoilCensus website (opens in new tab)"
+        >SoilCensus <span aria-hidden="true">↗</span></a>
+        <a href="mailto:hello@starrflylabs.com" class="footer-link">hello@starrflylabs.com</a>
+      </nav>
     </div>
-</section>
-<!-- Call To Action Section End -->
+  </footer>
 
+  <script>
+  'use strict';
 
-<!-- Footer Section Start -->
-<footer id="footer">
-    <div class="container">
-        <div class="row content-justify-between">
-            <div class="col-md-8 col-12 text-center text-lg-left text-md-left">
-                <p class="copyright">Copyright
-                    <span>
-                        <script>document.write(new Date().getFullYear())</script>
-                    </span>| Starrfly Labs LLC | All Rights Reserved
-                </p>
-            </div>
-            <div class="col-md-4 col-12">
-                <!-- Social Media -->
-                <ul class="social text-center text-md-right text-lg-right">
-                    
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- footer section end -->
+  /* Nav scroll */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
 
-<!-- jquery -->
-<script src="https://starrflylabs.com/plugins/jQurey/jquery.min.js"></script>
-<!-- Form Validation -->
-<script src="https://starrflylabs.com/plugins/form-validation/jquery.form.js"></script>
-<script src="https://starrflylabs.com/plugins/form-validation/jquery.validate.min.js"></script>
-<!-- slick slider -->
-<script src="https://starrflylabs.com/plugins/slick/slick.min.js"></script>
-<!-- bootstrap js -->
-<script src="https://starrflylabs.com/plugins/bootstrap/bootstrap.min.js"></script>
-<!-- wow js -->
-<script src="https://starrflylabs.com/plugins/wow-js/wow.min.js"></script>
-<!-- slider js -->
-<script src="https://starrflylabs.com/plugins/slider/slider.js"></script>
-<!-- Fancybox -->
-<script src="https://starrflylabs.com/plugins/facncybox/jquery.fancybox.js"></script>
-<!-- template main js -->
+  /* Mobile nav toggle */
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
 
-<script src="https://starrflylabs.com/js/script.min.js"></script>
-<!-- google analitycs -->
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'Your ID', 'auto');
-    ga('send', 'pageview');
-</script></body>
+  /* Close nav on link click */
+  links.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation menu');
+    document.body.style.overflow = '';
+  }));
+
+  /* Close nav on Escape key */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && links.classList.contains('open')) {
+      links.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation menu');
+      document.body.style.overflow = '';
+      toggle.focus();
+    }
+  });
+
+  /* Scroll reveal — respect reduced motion */
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) {
+    const obs = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, {threshold:.1, rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal').forEach(el => {
+      const sibs = Array.from(el.parentElement.querySelectorAll('.reveal'));
+      el.style.transitionDelay = `${sibs.indexOf(el) * .08}s`;
+      obs.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  /* Dynamic copyright year */
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  /* Smooth scroll with nav offset */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (!t) return;
+      e.preventDefault();
+      window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - nav.offsetHeight - 16, behavior:'smooth'});
+      t.setAttribute('tabindex', '-1');
+      t.focus({preventScroll: true});
+    });
+  });
+  </script>
+</body>
 </html>
